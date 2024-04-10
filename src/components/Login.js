@@ -5,14 +5,12 @@ import { isValidData } from "../Utils/Validate";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../Utils/Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/UserSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const toggleSignUpForm = () => {
@@ -47,7 +45,6 @@ const Login = () => {
                     displayName: displayName,
                   })
                 );
-                navigate("/browse");
               })
               .catch((error) => {
                 setErrorMessage(error.message);
@@ -67,7 +64,6 @@ const Login = () => {
           .then((userCredential) => {
             const user = userCredential.user;
             console.log(user);
-            navigate("/browse");
           })
           .catch((error) => {
             const errorCode = error.code;
